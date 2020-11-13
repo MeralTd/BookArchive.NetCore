@@ -1,0 +1,106 @@
+@model IEnumerable<BookWeb.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a asp-action="Create"  class="btn btn-create" >New Book</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PageCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PageCount)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-edit">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-detail">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-delete delete">Delete</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<style>
+  .btn-create {
+    color: #fff;
+    background-color: #FF5733;
+    border-color: #FF5733;
+    margin-left: 860px;
+   }
+
+  .btn-create:hover{
+    color: #FF5733;
+    background-color: #fff;
+    border-color: #FF5733;
+  }
+
+  .btn-edit {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+   }
+
+  .btn-edit:hover{
+    color: #1861ac;
+    background-color: #fff;
+    border-color: #1861ac;
+  }
+
+  .btn-detail {
+    color: #fff;
+    background-color: #1bc223;
+    border-color: #1bc223;
+  }
+  
+  .btn-detail:hover {
+    color: #1bc223;
+    background-color: #fff;
+    border-color: #1bc223;
+  }
+  
+  .btn-delete {
+    color: #fff;
+    background-color: #ee2c2c;
+    border-color: #ee2c2c;
+  }
+  .btn-delete:hover{
+    color: #ee2c2c;
+    background-color: #fff;
+    border-color: #ee2c2c;
+  }
+</style>
+@section scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+       $(".delete").on("click", null, function(){
+            return confirm("Are you sure you want to delete?");
+        });
+    </script>
+}
